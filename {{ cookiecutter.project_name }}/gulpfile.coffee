@@ -34,7 +34,6 @@ gulp.task 'compile_vendors_css', ->
     ]
   )
   .pipe(concat('vendors.min.css'))
-  .pipe(uglify())
   .pipe(gulp.dest('build/css'))
   .pipe(connect.reload())
 
@@ -47,6 +46,7 @@ gulp.task 'compile_app', ->
       # controllers
       'coffee/controllers/base.coffee',
       'coffee/controllers/navbar.coffee',
+      'coffee/controllers/cookies.coffee',
       'coffee/controllers/home.coffee',
 
       # generals
@@ -71,7 +71,7 @@ gulp.task 'compile_sass', ->
   )
   .pipe(concat('styles.min.css'))
   .pipe(sass())
-#  .pipe(uglify())
+  .pipe(uglify())
   .pipe(gulp.dest('build/css'))
   .pipe(connect.reload())
 
