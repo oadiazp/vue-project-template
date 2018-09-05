@@ -7,7 +7,46 @@
     <link rel="stylesheet" href="build/css/app.min.css"/>
 </head>
 <body>
+    <script id="navbar_tmpl" language="vuejs/tmpl">
+        <nav class="navbar navbar-expand-lg     navbar-dark fixed-top" id="sideNav">
+           <a class="navbar-brand" href="#">{% trans '{{ cookiecutter.project_name }}' %}</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </nav>
+    </script>
+
+    <script id="home_tmpl" language="vuejs/tmpl">
+        <div id="home">
+            <img src="{% static 'img/cds.jpg' %}" class="rounded mx-auto d-block">
+
+            <search></search>
+        </div>
+    </script>
+
+    <script id="cookies_tmpl" language="vuejs/tmpl">
+        <div class="row justify-content-center fixed-bottom align-items-center cookies">
+            <div class="col-md-6">
+                <p>{% trans 'This website will access to its cookies or third-party ones, if you continue browsing on it may means you accept it.' %}</p>
+            </div>
+
+            <div class="col-md-1">
+                <button class="btn btn-light" @click="close()">{% trans 'Close' %}</button>
+            </div>
+        </div>
+    </script>
+
     <script src="build/js/vendors.min.js"></script>
     <script src="build/js/app.min.js"></script>
+
+    <div class="container-fluid main-container">
+        <navbar></navbar>
+
+        <div class="container">
+            <router-view></router-view>
+        </div>
+
+        <cookies v-if="!cookies"></cookies>
+    </div>
 </body>
 </html>
