@@ -71,7 +71,7 @@ gulp.task 'compile_sass', ->
   )
   .pipe(concat('styles.min.css'))
   .pipe(sass())
-  .pipe(uglify())
+#  .pipe(uglify())
   .pipe(gulp.dest('build/css'))
   .pipe(connect.reload())
 
