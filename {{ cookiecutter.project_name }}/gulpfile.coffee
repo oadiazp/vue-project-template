@@ -11,7 +11,7 @@ gulp.task 'connect', ->
         root: '.',
         livereload: true
 
-gulp.task 'compile_vendors', ->
+gulp.task 'compile_vendors_js', ->
   gulp.src(
     [
       'node_modules/jquery/dist/jquery.js',
@@ -25,6 +25,17 @@ gulp.task 'compile_vendors', ->
   .pipe(concat('vendors.min.js'))
   .pipe(uglify())
   .pipe(gulp.dest('build/js'))
+  .pipe(connect.reload())
+
+gulp.task 'compile_vendors_css', ->
+  gulp.src(
+    [
+      'node_modules/bootstrap/dist/css/bootstrap.css',
+    ]
+  )
+  .pipe(concat('vendors.min.css'))
+  .pipe(uglify())
+  .pipe(gulp.dest('build/css'))
   .pipe(connect.reload())
 
 gulp.task 'compile_app', ->
@@ -71,4 +82,10 @@ gulp.task 'watch', ->
 
 gulp.task 'ws', ['connect', 'watch']
 
-gulp.task 'default', ['compile_vendors', 'compile_app', 'compile_sass', 'gulp',]
+gulp.task 'default', [
+  'compile_vendors_js',
+  'compile_vendors_css',
+  'compile_app',
+  'compile_sass',
+  'ws',
+]
