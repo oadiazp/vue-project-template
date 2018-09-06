@@ -64,14 +64,9 @@ gulp.task 'compile_app', ->
 
 
 gulp.task 'compile_sass', ->
-  gulp.src(
-    [
-      'sass/main.scss',
-    ]
-  )
-  .pipe(concat('styles.min.css'))
-  .pipe(sass())
-  .pipe(uglify())
+  gulp.src('sass/**/*.scss')
+  .pipe(concat('app.min.css'))
+  .pipe(sass().on('error', sass.logError))
   .pipe(gulp.dest('build/css'))
   .pipe(connect.reload())
 
