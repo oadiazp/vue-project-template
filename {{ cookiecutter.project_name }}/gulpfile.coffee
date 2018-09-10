@@ -16,6 +16,7 @@ gulp.task 'compile_vendors_js', ->
     [
       'node_modules/jquery/dist/jquery.js',
       'node_modules/bootstrap/dist/js/bootstrap.js',
+      'node_modules/vue-i18n/dist/vue-i18n.js',
       'node_modules/vue/dist/vue.js',
       'node_modules/vuex/dist/vuex.js',
       'node_modules/vue-router/dist/vue-router.js',

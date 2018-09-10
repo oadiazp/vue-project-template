@@ -38,9 +38,24 @@ $ ->
     mode: 'history'
     routes: routes
 
+    Vue.use VueI18n
+
+  messages =
+    en:
+      message:
+        hello: 'Hello world!'
+    ja:
+      message:
+        hello: 'こんにちは、世界'
+
+  i18n = new VueI18n
+    locale: 'ja',
+    messages: messages
+
   app = new Vue
     router: router
     store: @store
+    i18n: i18n
     computed:
       cookies: ->
         Cookies.get 'accepted_cookies'
