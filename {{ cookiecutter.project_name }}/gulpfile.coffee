@@ -5,14 +5,14 @@ coffee = require('gulp-coffee')
 sass = require('gulp-sass')
 connect = require('gulp-connect')
 watch = require('gulp-watch')
-series = require('gulp').series
+{ series } = require('gulp')
 
 connect_ = (cb) ->
     connect.server
         root: '.',
-        livereload: true
-
-    cb()
+        livereload: true,
+        ->
+          cb()
 
 compile_vendors_js = (cb) ->
   gulp.src(
@@ -83,22 +83,17 @@ compile_sass = (cb) ->
   cb()
 
 
-watch = (cb) ->
-    gulp.watch(['coffee/*/*'], ['compile_app']);
-    gulp.watch(['sass/*/*'], ['compile_sass']);
+watch_ = (cb) ->
+    watch('coffee/*/*.coffee', -> compile_app(cb));
+    watch(['sass/*/*.scss'], -> compile_sass(cb));
     cb()
 
 ws = (cb) ->
-  series(connect_, watch)
+  series(connect_, watch_)
 
   cb()
 
-exports.compile_vendors_js = compile_vendors_js
-exports.compile_vendors_css = compile_vendors_css
-exports.compile_app = compile_app
-exports.compile_sass = compile_sass
-exports.connect = connect_
-exports.ws = series(connect_, watch)
+exports.ws = series(connect_, watch_)
 exports.default = series(
   compile_vendors_js,
   compile_vendors_css,
